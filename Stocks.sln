@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stocks", "Stocks\Stocks.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stocks.Tests", "Stocks.Tests\Stocks.Tests.csproj", "{07487310-FBBE-4B0F-B05F-BB8FE5448389}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stocks.AuthTestApp", "Stocks.AuthTestApp\Stocks.AuthTestApp.csproj", "{8F7900B4-06A3-4913-A8FC-244E3BE34767}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{07487310-FBBE-4B0F-B05F-BB8FE5448389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07487310-FBBE-4B0F-B05F-BB8FE5448389}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07487310-FBBE-4B0F-B05F-BB8FE5448389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F7900B4-06A3-4913-A8FC-244E3BE34767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7900B4-06A3-4913-A8FC-244E3BE34767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7900B4-06A3-4913-A8FC-244E3BE34767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7900B4-06A3-4913-A8FC-244E3BE34767}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
