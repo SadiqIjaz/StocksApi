@@ -35,7 +35,12 @@ namespace Stocks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<StocksContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("StocksContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("StocksContext"),
+                sqlServerOptionsAction: sqlOptions => sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(6),
+                    errorNumbersToAdd: null)
+                ));
 
             if (Env.IsDevelopment())
             {
