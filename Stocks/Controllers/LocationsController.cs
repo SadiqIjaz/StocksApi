@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,15 +21,32 @@ namespace Stocks.Controllers
             _context = context;
         }
 
-        // GET: api/Locations
+        // GET: api/Locations & api/Locations?Name=
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Location>>> GetLocations([FromQuery] string name)
         {
-            return await _context.Locations.ToListAsync();
+            IEnumerable<Location> locations = null;
+
+            try
+            {
+                locations = await _context.Locations.ToListAsync();
+                if (locations != null && name != null)
+                {
+                    locations = locations.Where(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            catch
+            {
+                locations = Array.Empty<Location>();
+            }
+
+            return CreatedAtAction(nameof(GetLocations), locations.ToList());
         }
 
         // GET: api/Locations/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);
@@ -45,6 +63,7 @@ namespace Stocks.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutLocation(int id, Location location)
         {
             if (id != location.LocationId)
@@ -77,6 +96,7 @@ namespace Stocks.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
             _context.Locations.Add(location);
@@ -101,6 +121,7 @@ namespace Stocks.Controllers
 
         // DELETE: api/Locations/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Location>> DeleteLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);

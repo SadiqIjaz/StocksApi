@@ -47,6 +47,13 @@ namespace Stocks
             }
 
             services.AddControllers();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.Authority = Configuration["Auth:Domain"];
+                        options.Audience = Configuration["Auth:Audience"];
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline. 
@@ -64,6 +71,8 @@ namespace Stocks
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

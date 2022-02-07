@@ -17,9 +17,9 @@ namespace Stocks.Tests
     {
         private ProductDTO[] GetTestProducts() => new ProductDTO[]
         {
-            new ProductDTO { ProductId = 1, ProductName="Item 1", ProductStockist="Company1", ProductStockNo = 12, BrandId = 1, CategoryId = 1},
-            new ProductDTO { ProductId = 2, ProductName = "Item 2", ProductStockist="Company2", ProductStockNo = 1,  BrandId = 2, CategoryId = 1 },
-            new ProductDTO { ProductId = 3, ProductName = "Item 3", ProductStockist = "Company2", ProductStockNo = 41,  BrandId = 1, CategoryId = 2 }
+            new ProductDTO { ProductId = 1, ProductName="1tb SSD", ProductStockist="PcWholesale", ProductStockNo = 13, BrandId = 1, CategoryId = 1},
+            new ProductDTO { ProductId = 2, ProductName = "21\" Monitor", ProductStockist="MonitorWarehouse", ProductStockNo = 1,  BrandId = 2, CategoryId = 1 },
+            new ProductDTO { ProductId = 3, ProductName = "2tb HDD", ProductStockist = "PcWholesale", ProductStockNo = 41,  BrandId = 1, CategoryId = 2 }
         };
 
         [Fact]

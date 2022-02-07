@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace Stocks.Controllers
 
         // GET: api/Stocks & api/Stocks?Name=
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Stock>>> GetStocks([FromQuery] string name)
         {
             IEnumerable<Stock> stocks = null;
@@ -44,6 +46,7 @@ namespace Stocks.Controllers
 
         // GET: api/Stocks/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Stock>> GetStocks(int id)
         {
             var stock = await _context.Stocks.FindAsync(id);
@@ -60,6 +63,7 @@ namespace Stocks.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutStocks(int id, Stock stock)
         {
             if (id != stock.StockId)
@@ -92,6 +96,7 @@ namespace Stocks.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Stock>> PostStocks(Stock stock)
         {
             _context.Stocks.Add(stock);
@@ -102,6 +107,7 @@ namespace Stocks.Controllers
 
         // DELETE: api/Stocks/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Stock>> DeleteStocks(int id)
         {
             var stock = await _context.Stocks.FindAsync(id);
