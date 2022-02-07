@@ -12,29 +12,33 @@ namespace StocksWeb.Controllers
     {
         public string access_token { get; set; }
         public int expires_in { get; set; }
+#pragma warning disable IDE1006 // Naming Styles
         public string token_type { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
 
     public class StocksController : Controller
     {
         // use polly retry
 
-        private HttpClient httpClient;
-        IConfiguration configuration;
+        readonly HttpClient httpClient;
+        readonly IConfiguration configuration;
 
         public StocksController(IConfiguration configuration)
         {
             this.configuration = configuration;
             httpClient = new HttpClient();
 
-            var request = new HttpRequestMessage(HttpMethod.Post, configuration["Auth:BaseAddress"]);
-            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, configuration["Auth:BaseAddress"])
             {
-                { "client_id", configuration["Auth:ClientId"] },
-                { "client_secret", configuration["Auth:ClientSecret"] },
-                { "audience", configuration["Auth:AuthAudience"] },
-                { "grant_type", "client_credentials" }
-            });
+                Content = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { "client_id", configuration["Auth:ClientId"] },
+                    { "client_secret", configuration["Auth:ClientSecret"] },
+                    { "audience", configuration["Auth:AuthAudience"] },
+                    { "grant_type", "client_credentials" }
+                })
+            };
 
             HttpResponseMessage response = httpClient.SendAsync(request).Result;
             var responseStream = response.Content.ReadAsStringAsync().Result;
@@ -47,11 +51,9 @@ namespace StocksWeb.Controllers
         // GET: Stock
         public ActionResult Index()
         {
-            var stock = new List<StockDTO>();
-
             HttpResponseMessage response = httpClient.GetAsync(configuration["Auth:AuthAudience"], HttpCompletionOption.ResponseContentRead).Result;
 
-            stock = JsonConvert.DeserializeObject<List<StockDTO>>(response.Content.ReadAsStringAsync().Result);
+            var stock = JsonConvert.DeserializeObject<List<StockDTO>>(response.Content.ReadAsStringAsync().Result);
 
             return View(stock);
         }
