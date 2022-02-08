@@ -47,7 +47,7 @@ namespace StocksWeb.Controllers
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenResponse.access_token);
         }
 
-        // GET: Stock
+        // GET: Stock 
         public ActionResult Index()
         {
             HttpResponseMessage response = httpClient.GetAsync(configuration["Auth:AuthAudience"], HttpCompletionOption.ResponseContentRead).Result;
