@@ -23,7 +23,7 @@ namespace Stocks.Controllers
 
         // GET: api/Stocks & api/Stocks?Name=
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Stock>>> GetStocks([FromQuery] string name)
         {
             IEnumerable<Stock> stocks = null;
@@ -46,7 +46,7 @@ namespace Stocks.Controllers
 
         // GET: api/Stocks/5
         [HttpGet("{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<Stock>> GetStocks(int id)
         {
             var stock = await _context.Stocks.FindAsync(id);

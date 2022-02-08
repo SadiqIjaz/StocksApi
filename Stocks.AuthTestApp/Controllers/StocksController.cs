@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using StockWeb.Models;
@@ -10,9 +9,9 @@ namespace StocksWeb.Controllers
 {
     public class TokenResponse
     {
+#pragma warning disable IDE1006 // Naming Styles
         public string access_token { get; set; }
         public int expires_in { get; set; }
-#pragma warning disable IDE1006 // Naming Styles
         public string token_type { get; set; }
 #pragma warning restore IDE1006 // Naming Styles
     }
@@ -59,7 +58,9 @@ namespace StocksWeb.Controllers
         }
 
         // GET: Stock/Details/5
+#pragma warning disable IDE0060 // Remove unused parameter
         public ActionResult Details(int id)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             var stock = new StockDTO();
             return View(stock);
