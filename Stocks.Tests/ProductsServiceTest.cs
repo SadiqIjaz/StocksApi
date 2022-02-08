@@ -57,7 +57,7 @@ namespace Stocks.Tests
         {
             var mockConfiguration = new Mock<IConfiguration>(MockBehavior.Strict);
             mockConfiguration.Setup(c => c["BaseUrls:ProductsService"])
-                             .Returns("https://thamco-productapi.azurewebsites.net/");
+                             .Returns("https://products-testing.azurewebsites.net/");
 
             return new ProductsService(client, mockConfiguration.Object);
         }
@@ -68,7 +68,7 @@ namespace Stocks.Tests
             // Arrange
             var expectedResult = GetTestProducts().First();
             var expectedJson = JsonConvert.SerializeObject(expectedResult);
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products/1");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products/1");
             var mock = CreateHttpMock(HttpStatusCode.OK, expectedJson);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -91,7 +91,7 @@ namespace Stocks.Tests
         public async Task GetProductAsync_WithInvalid_ShouldReturnNull()
         {
             // Arrange
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products/1000");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products/1000");
             var mock = CreateHttpMock(HttpStatusCode.NotFound, null);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -112,7 +112,7 @@ namespace Stocks.Tests
         public async Task GetProductAsync_OnHttpBad_ShouldThrow()
         {
             // Arrange
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products/1");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products/1");
             var mock = CreateHttpMock(HttpStatusCode.ServiceUnavailable, null);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -128,7 +128,7 @@ namespace Stocks.Tests
             // Arrange
             var expectedResult = GetTestProducts();
             var expectedJson = JsonConvert.SerializeObject(expectedResult);
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products");
             var mock = CreateHttpMock(HttpStatusCode.OK, expectedJson);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -158,7 +158,7 @@ namespace Stocks.Tests
             // Arrange
             var expectedResult = GetTestProducts();
             var expectedJson = JsonConvert.SerializeObject(expectedResult);
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products?productName=Item%201");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products?productName=Item%201");
             var mock = CreateHttpMock(HttpStatusCode.OK, expectedJson);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -187,7 +187,7 @@ namespace Stocks.Tests
             // Arrange
             var expectedResult = new ProductDTO[0];
             var expectedJson = JsonConvert.SerializeObject(expectedResult);
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products?productName=AAAAAA");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products?productName=AAAAAA");
             var mock = CreateHttpMock(HttpStatusCode.OK, expectedJson);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
@@ -209,7 +209,7 @@ namespace Stocks.Tests
         public async Task GetProductsAsync_OnHttpBad_ShouldThrow()
         {
             // Arrange
-            var expectedUri = new Uri("https://thamco-productapi.azurewebsites.net/api/Products");
+            var expectedUri = new Uri("https://products-testing.azurewebsites.net/api/Products");
             var mock = CreateHttpMock(HttpStatusCode.ServiceUnavailable, null);
             var client = new HttpClient(mock.Object);
             var service = CreateProductsService(client);
